@@ -20,7 +20,7 @@ The virtual system is a classical water system (chillers + water pumps + cooling
 | Pumps    | Chilled Water Pump#1: with more nominal waterflow in nameplate Fixed Freq, two pumps in total<br/>Chilled Water Pump#2: with less nominal waterflow in nameplate Fixed Freq, one pump<br/>Cooling Water Pump#1: with more nominal waterflow in nameplate Fixed Freq, two pumps in total<br/>Cooling Water Pump#2: with less nominal waterflow in nameplate Fixed Freq, one pump<br/> |
 | Tower    | All Cooling Towers are idential, with variable-speed fans                                                                                                                                                                                                                                                                                                                            |
 
-![drawing.jpg](E:\Windows_C\Desktop\VirtualRL\drawing.jpg)
+![drawing.jpg](https://github.com/Hurricane-k/BuildingEfficiencyAgent_in_VirtualEnv/blob/main/SystemLayoutAbstract.jpg)
 
 
 
