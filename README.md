@@ -65,6 +65,21 @@ Our focus on chillers can cooling towers makes us simplify water pumps. All wate
 
 The table structure is the column is action, 0.1, 0.15, 0.2, ... 1.0 (for load allocation for smaller chiller), for example, when $action = 0.5$, the load that smaller chiller deals with $0.5*Capacity_{nominal smaller chiller}$. the row is status, 0.1, 0.15, 0.2, ..., 1.0, we presume the maximum of total load is 7000 kW, the status can be got by $Load_{current}/Load_{maximum}, Load_{maximum}=7000kW$.
 
+# Workflow of the Example
 
-
+```mermaid
+flowchart TD
+    A[Current Load] --> B[Load Discretization]
+    B --> C[Chiller Operation]
+    C --> D{Q-Learning?}
+    D -->|No| E[Optimize the Control for Cooling Towers]
+    D -->|Yes| F[Agent Decides Load Allocation] 
+    F --> E
+    E --> E1(the Number of Cooling Towers under operation)
+    E --> E2(the Frequency of Fan in Cooling Towers)
+    E1 & E2 --> G[Enter the next load randomly]
+    G --> H{Maximum \n Iteration?}
+    H -->|Yes| I[Finish]
+    H -->|No| B
+```
 
