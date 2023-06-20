@@ -73,7 +73,8 @@ flowchart TD
     A[Current Load] --> B[Load Discretization]
     B --> C[Chiller Operation]
     C --> D{Q-Learning?}
-    D -->|No| E[Optimize the Control for Cooling Towers]
+    D -->|No| D1[Average Load Allocation]
+    D1 --> E[Optimize the Control for Cooling Towers]
     D -->|Yes| F[Agent Decides Load Allocation] 
     F --> E
     E --> E1(the Number of Cooling Towers under operation)
