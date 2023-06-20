@@ -18,7 +18,9 @@ The virtual system is a classical water system (chillers + water pumps + cooling
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Chillers | Chiller#1: with larger capacity, two chillers in total<br/>Chiller#2: with smaller capacity, one chiller. (details in .ipynb 7. subfunction)                                                                                                                                                                                                                                         |
 | Pumps    | Chilled Water Pump#1: with more nominal waterflow in nameplate Fixed Freq, two pumps in total<br/>Chilled Water Pump#2: with less nominal waterflow in nameplate Fixed Freq, one pump<br/>Cooling Water Pump#1: with more nominal waterflow in nameplate Fixed Freq, two pumps in total<br/>Cooling Water Pump#2: with less nominal waterflow in nameplate Fixed Freq, one pump<br/> |
-| Tower    | All Cooling Towers are idential, with variable-speed fans                                                                                                                                                                                                                                                                                                                            |
+| Tower    | All Cooling Towers are idential, with variable-speed fans                                                                                               |
+
+
 ![Layout.jpg](https://github.com/Hurricane-k/BuildingEfficiencyAgent_in_VirtualEnv/blob/main/SystemLayoutAbstract.jpg)
 
 # 4. Hard Things to Solve
