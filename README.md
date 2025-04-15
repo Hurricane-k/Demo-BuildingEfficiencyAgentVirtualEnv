@@ -1,8 +1,12 @@
-# 1. What is it for
+<p align="center">
+    <h1 align="center">Building efficiency agent in virtual environment</h1>
+</p>
+
+## 1. What is it for
 
 This is a simple example of how to train agent for building energy efficiency in virtual environment without the help of other external software, like [fmi](https://fmi-standard.org/) or [OpenModelica](https://openmodelica.org/). If you are interested in how research crowd do similar things, I write a [blog](https://carrybio.netlify.app/posts/blog12/) to summarize it briefly.
 
-# 2. What does it have
+## 2. What does it have
 
 In my example, to make it comprehensive, model-based and model-free are in this example. Model-free is to do load allocation by Q-learning. Model-based is to control the number of cooling towers and frequency of fans in them.  
 
@@ -10,7 +14,7 @@ For every load, model-free is followed by model-based (load allocation first and
 
 In model-free method, reward is about total COP ($COP_{total}=\frac{load}{P_{chillers}+P_{pumps}+P_{towers}}$). that will be independent of any RL relevant package. In model-based method, goal the minimum of total energy consumption.
 
-# 3. Configuration
+## 3. Configuration
 
 The virtual system is a classical water system (chillers + water pumps + cooling towers).
 
@@ -23,23 +27,23 @@ The virtual system is a classical water system (chillers + water pumps + cooling
 
 ![Layout.jpg](https://github.com/Hurricane-k/BuildingEfficiencyAgent_in_VirtualEnv/blob/main/SystemLayoutAbstract.jpg)
 
-# 4. Hard Things to Solve
+## 4. Hard Things to Solve
 
-## 4.1 Decoupling
+### 4.1 Decoupling
 
 Chillers are nexus of two water loops. Cooling water will go through cooling towers and chillers so that the temperature will be affected by these two components. You can calculate temperatures of cooling water from two perspectives. Theoretically you can get the same result from two sides. One perspective is chiller and law of energy conversion. The amount of heat transfer in chilled water loop should equal that in cooling water loop. Other persepctive is cooling tower. $T_{cwl}=f_{tower}(\triangle t,t_{wb},...)$. where $\triangle t$ is the difference between temperature of water entering and leaving tower ($T_{cwl}$), $t_{wb}$ is the wet bulb temperature of ambient air. $\triangle t$ needs both key temperatures simultaneously. You need iteration or other methods to get result converged. If you wanna explore more details about the cooling tower perspective, you can check [EngineeringReference](https://github.com/Hurricane-k/BuildingEfficiencyAgent_in_VirtualEnv/blob/main/EngineeringReference.pdf), I put pdf format file in repository. I annotate it in .ipynb file. I use iteration to solve this decoupling problem, for the sake of efficiency, I set the maximum iteration. (`8.8 calculate the temperature of cooling water entering cooling tower` in .ipynb)
 
 ![decoupling.jpg](https://github.com/Hurricane-k/BuildingEfficiencyAgent_in_VirtualEnv/blob/main/decoupling.jpg)
 
-## 4.2 Solve $T_{cwl}$ from the persepctive of cooling tower
+### 4.2 Solve $T_{cwl}$ from the persepctive of cooling tower
 
 To simplify, I use loop method instead of some methods to get converged results, which means cannot make sure the ultimate result $t_{cwl}$ would be definitely converged. I will generate several temperatures as candidates to see their residual. and choose the best candidate based on the minimum residual. (`1.1 calculating outlet water temperature`)
 
-# 5. Simplify some components
+## 5. Simplify some components
 
 Our focus on chillers can cooling towers makes us simplify water pumps. All water pumps are not variable-speed, they are with fixed frequency 50Hz. You can get my meaning in `2 Cooling Water Pump`
 
-# 6. Structure of .ipynb
+## 6. Structure of .ipynb
 
 1. `1 Cooling Tower` includes cooling tower models and how to calculate $T_{cwl}$ from the perspective of cooling towers, the model of fan power is simple cubic formula, which is based on real equipment, you can change it if necessary.
   
@@ -61,7 +65,7 @@ Our focus on chillers can cooling towers makes us simplify water pumps. All wate
   
 10. `8.9` is how to choose the optimal control set (for cooling towers) using model-based method after using Q-learning load allocation. But one thing needs to notice, model-based optimization for cooling tower control is necessary, whether Q-learning is used or not for every load.
   
-# 7. Filefold
+## 7. Filefold
 
 | file | details |
 | --- | --- |
@@ -74,11 +78,11 @@ Our focus on chillers can cooling towers makes us simplify water pumps. All wate
 | README.md | a brief introduction of the respority |
 
 
-# 8. Other Notice
+## 8. Other Notice
 
 The table structure is the column is action, 0.1, 0.15, 0.2, ... 1.0 (for load allocation for smaller chiller), for example, when $action = 0.5$, the load that smaller chiller deals with $0.5*Capacity_{nominal smaller chiller}$. the row is status, 0.1, 0.15, 0.2, ..., 1.0, we presume the maximum of total load is 7000 kW, the status can be got by $Load_{current}/Load_{maximum}, Load_{maximum}=7000kW$.
 
-# 9. Workflow of the Example
+## 9. Workflow of the Example
 
 ```mermaid
 flowchart TD
